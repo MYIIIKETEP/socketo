@@ -14,6 +14,12 @@ const chatMessageSchema = new Schema({
         minlength: 1,
         
     },
+    room: {
+       type:String,
+       required:true,
+       trim:true,
+       
+    }
      
 }, {
     timestamps: true

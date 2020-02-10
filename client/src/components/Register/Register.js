@@ -21,13 +21,17 @@ const Register = () => {
 
 
 
-    function postUser() {
+    function postUser(e) {
+        e.preventDefault();
+        console.log("LOL")
         axios.post("http://localhost:4000/users/reg", user)
             .then(res => {
+                setRegistered(true);
+                localStorage.setItem("user", userName)
                 console.log(res.data)
 
                 //setStatusMessage("Success! you have been registered with username" + user.userID);
-                setRegistered(true);
+                
                 console.log(registered);
             }).catch((error) => {
                 console.log(error);
@@ -44,7 +48,6 @@ const Register = () => {
         <div>
 
             <form onSubmit={postUser}>
-
                 <input placeholder="Username" onChange={e => setUserName(e.target.value)} />
                 <input placeholder="Password" onChange={e => setPassword(e.target.value)} />
                 <input placeholder="email" onChange={e => setEmail(e.target.value)} />
@@ -52,7 +55,7 @@ const Register = () => {
             </form>
 
 
-            {registered === true ? <Redirect to="/" /> : null}
+            {(!registered) ? null :<Redirect to="/join" />}
 
         </div>
     )

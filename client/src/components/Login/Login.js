@@ -38,22 +38,31 @@ const Login = () => {
     }
 
 
-
+     const logout =()=>{
+         localStorage.clear();
+         setValidation(false)
+     }
 
 
     return (
-
+   
         <div>
-            <h1>Login</h1>
+            {(!localStorage.getItem("user"))? <div> <h1>Login</h1>
             <p>{statusMessage}</p>
             <div><input placeholder="UserName" type="text" onChange={(event) => setUserName(event.target.value)} /></div>
             <div><input placeholder="Password" type="text" onChange={(event) => setPassword(event.target.value)} /></div>
-
-            <button onClick={getValidation}>Login</button>
-            <Link to="/reg"><button>Register</button></Link>
             {(!validation) ? null : <Redirect to="/join"></Redirect>}
+            <button onClick={getValidation}>Login</button>
+            <Link to="/reg"><button>Register</button></Link></div> : <div><h1>Welcome Back  {localStorage.getItem("user")} </h1> 
+            <button onClick={logout}><Link to="/">Logout</Link></button>
+            {(!validation) ? null : <Redirect to="/join"></Redirect>}</div>
+            
+            }
+            
+            
 
         </div>
+        
 
     )
 
