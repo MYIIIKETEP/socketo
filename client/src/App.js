@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Login from "./components/loginReg/Login-Reg";
+import Login from "./components/Login/Login";
 import Join from "./components/Join/Join.js";
 import Chat from "./components/Chat/Chat.js";
 const App = () => (
@@ -14,4 +14,4 @@ const App = () => (
 
 );
 
-export default App;
+export default App; 
