@@ -9,12 +9,51 @@ import axios from "axios";
 let socket;
 
 
+
+
+
 const Chat = ({ location }) => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const ENDPOINT = "localhost:5000";
+
+
+
+  function getMessages(currentRoom) {
+
+
+    let messageObjectArray = [];
+
+    console.log("room: " + currentRoom);
+    axios.get("http://localhost:4000/messages").then(messagesDB => {
+
+
+      messagesDB.data.forEach(message => {
+
+
+
+        if (currentRoom === message.room) {
+          let tempObject = { user: message.userID, text: message.message }
+          messageObjectArray.push(tempObject);
+
+        }
+      });
+
+      setMessages(messageObjectArray);
+    });
+
+
+    //setMessages(messageObjectArray);
+    console.log(messages);
+  }
+
+  if (messages.length < 1) {
+    getMessages(room);
+  }
+
+
 
 
   useEffect(() => {
@@ -25,39 +64,31 @@ const Chat = ({ location }) => {
     setName(name);
     setRoom(room);
 
-    console.log(socket)
+
     socket.emit("join", { name, room }, () => {
 
     });
+
+
+    // getMessages(room);
+
     return () => {
       socket.emit("disconnect")
       socket.off();
     }
-
   },
     [ENDPOINT, location.search]);
 
 
 
-  function getMessages() {
-    let messageObjectArray = [];
 
-    axios.get("http://localhost:4000/messages").then(messagesDB => {
-      messagesDB.data.forEach(message => {
-        let textObject;
-
-
-      });
-
-    });
-  }
 
 
 
   useEffect(() => {
     socket.on("message", (message) => {
+      console.log(message);
       setMessages([...messages, message]);
-      getMessages();
     })
   }, [messages])
 
