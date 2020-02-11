@@ -9,6 +9,13 @@ router.route("/").get((req, res) => {
         .catch(err => res.status(400).json("Error", + err))
 })
 
+router.route("/:room").get((req,res)=>{
+   chatMessage.find(req.body.room)
+    .then(messages => res.json(messages))
+    .catch(err=> res.status(400).json("Error: "+ err));
+ }
+ )
+
 router.route("/post").post((req, res) => {
     const userID = req.body.userID;
     const message = req.body.message;
