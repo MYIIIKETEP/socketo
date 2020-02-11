@@ -5,11 +5,12 @@ import "./Chat.css"
 import InfoBar from "../infoBar/InfoBar"
 import Input from "../Input/Input";
 import Messages from "../Messages/Messages";
+import axios from "axios";
 let socket;
 
 
 const Chat = ({ location }) => {
-  const [name, setName] =  useState('');
+  const [name, setName] = useState('');
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
@@ -17,7 +18,7 @@ const Chat = ({ location }) => {
 
 
   useEffect(() => {
-    const {room} = queryString.parse(location.search);
+    const { room } = queryString.parse(location.search);
     const name = localStorage.getItem("user");
     socket = io(ENDPOINT);
 
@@ -36,9 +37,27 @@ const Chat = ({ location }) => {
   },
     [ENDPOINT, location.search]);
 
+
+
+  function getMessages() {
+    let messageObjectArray = [];
+
+    axios.get("http://localhost:4000/messages").then(messagesDB => {
+      messagesDB.data.forEach(message => {
+        let textObject;
+
+
+      });
+
+    });
+  }
+
+
+
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages([...messages, message]);
+      getMessages();
     })
   }, [messages])
 
@@ -47,6 +66,17 @@ const Chat = ({ location }) => {
     event.preventDefault();
 
     if (message) {
+      let messageObject = {
+        userID: name,
+        message: message,
+        room: room
+      }
+
+      axios.post("http://localhost:4000/messages/post", messageObject).then(data => {
+        console.log(data);
+      })
+
+
       socket.emit("sendMessage", message, () => {
         setMessage("");
       });

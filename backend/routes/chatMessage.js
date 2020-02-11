@@ -17,9 +17,9 @@ router.route("/post").post((req, res) => {
         userID,
         message,
         room
-        });
+    });
 
-   
+
     newMessage.save()
         .then(() => res.json("Message added!"))
         .catch(err => res.status(400).json("Error" + err))
