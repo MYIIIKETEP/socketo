@@ -18,7 +18,6 @@ const App = () => {
         <Router>
 
             <Route path="/" component={Login} />
-
             <Route path="/chat" component={Chat} />
             <Route path="/join" exact component={Join} />
             <Route path="/reg" exact component={Register} />

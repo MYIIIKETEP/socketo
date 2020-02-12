@@ -37,10 +37,7 @@ const Login = () => {
 
     }
 
-
-    const hideLogin = () => {
-        document.querySelector(".login-outer-container").classList.add("hide");
-    }
+ 
 
 
 
@@ -51,8 +48,10 @@ const Login = () => {
 
 
     return (
-
-        <div id="login-outer-container" className="login-outer-container mx-auto my-auto col-2">
+       
+        <div id="login-outer-container" className={`login-outer-container mx-auto my-auto col-2 ${(window.location.href)!="http://localhost:3000/reg" ? null:"hide"}`}>
+             {console.log(window.location.href)}
+           
             {(!localStorage.getItem("user")) ? <div> <h1>Login</h1>
                 <p>{statusMessage}</p>
 
@@ -69,11 +68,11 @@ const Login = () => {
                 {(!validation) ? null : <Redirect to="/join"></Redirect>}
                 <button className="btn btn-primary" onClick={getValidation}>Login</button>
 
-                <Link to="/reg"><button id="reg-button" onClick={hideLogin} className="btn btn-primary">Register</button></Link></div> : <div><h1>Welcome  {localStorage.getItem("user")} </h1>
+                <Link to="/reg"><button id="reg-button" className="btn btn-primary">Register</button></Link></div> : <div><h1>Welcome  {localStorage.getItem("user")} </h1>
 
                     <button className="btn btn-danger" onClick={logout}><Link to="/">Logout</Link></button>
 
-                    {(!validation) ? null : <Redirect to="/join"></Redirect>}</div>
+                    <Redirect to="/join"></Redirect></div>
 
             }
         </div >
