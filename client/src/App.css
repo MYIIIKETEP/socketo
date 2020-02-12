@@ -1,0 +1,10 @@
+#root{
+    background-color: #1A1A1D;
+}
+
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}

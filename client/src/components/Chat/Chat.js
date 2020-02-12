@@ -19,8 +19,6 @@ const Chat = ({ location }) => {
   const [messages, setMessages] = useState([])
   const ENDPOINT = "localhost:5000";
 
-
-
   function getMessages(currentRoom) {
 
 

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react"
 import axios from "axios"
 import { Link, Redirect } from "react-router-dom";
-
+import "./Login.css"
 
 const Login = () => {
     const [userName, setUserName] = useState('');
@@ -38,38 +38,46 @@ const Login = () => {
     }
 
 
-     const logout =()=>{
-         localStorage.clear();
-         setValidation(false)
-     }
+    const hideLogin = () => {
+        document.querySelector(".login-outer-container").classList.add("hide");
+    }
+
+
+
+    const logout = () => {
+        localStorage.clear();
+        setValidation(false)
+    }
 
 
     return (
-   
-        <div>
-            {(!localStorage.getItem("user"))? <div> <h1>Login</h1>
-            <p>{statusMessage}</p>
-            <div><input placeholder="UserName" type="text" onChange={(event) => setUserName(event.target.value)} /></div>
-            <div><input placeholder="Password" type="text" onChange={(event) => setPassword(event.target.value)} /></div>
-            {(!validation) ? null : <Redirect to="/join"></Redirect>}
-            <button onClick={getValidation}>Login</button>
-            <Link to="/reg"><button>Register</button></Link></div> : <div><h1>Welcome Back  {localStorage.getItem("user")} </h1> 
-            <button onClick={logout}><Link to="/">Logout</Link></button>
-            {(!validation) ? null : <Redirect to="/join"></Redirect>}</div>
-            
+
+        <div id="login-outer-container" className="login-outer-container mx-auto my-auto col-2">
+            {(!localStorage.getItem("user")) ? <div> <h1>Login</h1>
+                <p>{statusMessage}</p>
+
+                <div className="form-group mx-auto">
+
+                    <label >Username</label>
+                    <input className="form-control " placeholder="username" id="username" type="text" onChange={(event) => setUserName(event.target.value)} />
+                </div>
+
+                <div>
+                    <label >Password</label>
+                    <input className="form-control " placeholder="password" id="password" type="password" onChange={(event) => setPassword(event.target.value)} />
+                </div>
+                {(!validation) ? null : <Redirect to="/join"></Redirect>}
+                <button className="btn btn-primary" onClick={getValidation}>Login</button>
+
+                <Link to="/reg"><button id="reg-button" onClick={hideLogin} className="btn btn-primary">Register</button></Link></div> : <div><h1>Welcome  {localStorage.getItem("user")} </h1>
+
+                    <button className="btn btn-danger" onClick={logout}><Link to="/">Logout</Link></button>
+
+                    {(!validation) ? null : <Redirect to="/join"></Redirect>}</div>
+
             }
-            
-            
-
-        </div>
-        
-
+        </div >
     )
-
-
-
-
-
 }
 
 export default Login;

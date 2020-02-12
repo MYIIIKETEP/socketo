@@ -1,0 +1,11 @@
+.register-outer-container{
+    padding: 30px;
+    height: 10vh;
+    background-color: #1A1A1D;
+    color: white;
+}
+
+.register-outer-container label{
+    
+    color: white;
+}
