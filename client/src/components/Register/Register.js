@@ -29,7 +29,6 @@ const Register = () => {
         axios.post("http://localhost:4000/users/reg", user)
             .then(res => {
                 setRegistered(true);
-                localStorage.setItem("user", userName)
                 console.log(res.data)
 
                 //setStatusMessage("Success! you have been registered with username" + user.userID);
@@ -42,17 +41,13 @@ const Register = () => {
             });
     }
 
-    const hideLogin = () => {
-        console.log(document.querySelectorAll(".login-outer-container"));
-    }
-
+ 
 
 
     return (
 
         <div className="register-outer-container my-auto ">
-            {hideLogin()}
-
+            
 
             <h1 className="col-6 mx-auto">Register a user and start chatting!</h1>
 
@@ -77,7 +72,7 @@ const Register = () => {
             </form>
 
 
-            {(!registered) ? null : <Redirect to="/join" />}
+            {(!registered) ? null : <Redirect to="/" />}
 
         </div>
     )
