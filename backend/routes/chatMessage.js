@@ -1,4 +1,5 @@
 const router = require("express").Router();
+
 let chatMessage = require("../models/chatMessage.model")
 
 
@@ -11,9 +12,11 @@ router.route("/").get((req, res) => {
 
 
 router.route("/post").post((req, res) => {
+
     const userID = req.body.userID;
     const message = req.body.message;
     const room = req.body.room;
+
     const newMessage = new chatMessage({
         userID,
         message,

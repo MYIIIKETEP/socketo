@@ -41,15 +41,15 @@ const Register = () => {
             });
     }
 
- 
+
 
 
     return (
 
         <div className="register-outer-container my-auto ">
-            
 
-            <h1 className="col-6 mx-auto">Register a user and start chatting!</h1>
+
+            <h2 className="col-4 mx-auto mb-5">Register a user and start chatting!</h2>
 
 
             <form className=" form-group mx-auto col-4" onSubmit={postUser}>
@@ -59,7 +59,7 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input className="form-control" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                    <input className="form-control" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                 </div>
                 <div className="form-group">
                     <label>Email</label>

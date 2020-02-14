@@ -7,15 +7,15 @@ import onlineIcon from "../../icons/onlineIcon.png"
 const InfoBar = ({ room }) => {
     return (
         <div className="infoBar">
-            <div className="leftInnerContainer">
-                <img src={onlineIcon} alt="online icon" />
+            <div className="leftInnerContainer col-3">
+                <img className="online-icon" src={onlineIcon} alt="online icon" />
             </div>
 
-            <h3>{room}</h3>
+            <h3 className="mx-auto col-6">Welcome to {room}!</h3>
 
-            <div className="RightInnerContainer">
-          
-                <a href="/join"> <img src={closeIcon} alt="close icon" /></a>
+            <div className="RightInnerContainer col-2">
+
+                <a href="/join"> <img className="close-icon" src={closeIcon} alt="close icon" /></a>
             </div>
         </div>
     )

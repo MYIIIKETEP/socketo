@@ -4,7 +4,7 @@ import "./Input.css"
 const Input = ({ message, setMessage, sendMessage }) => (
     <form className="form">
         <input
-            className="input"
+            className="input col-9"
             type="text"
             placeholder="Type a message..."
             value={message}
@@ -12,8 +12,8 @@ const Input = ({ message, setMessage, sendMessage }) => (
             onKeyPress={event => event.key == "Enter" ? sendMessage(event) : null}
         />
 
+        <button className="btn btn-primary col-3" onClick={(event) => sendMessage(event)}>Send</button>
 
-        <button className="sendButton" onClick={(event) => sendMessage(event)}>Send</button>
     </form>
 )
 

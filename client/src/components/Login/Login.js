@@ -37,10 +37,6 @@ const Login = () => {
 
     }
 
- 
-
-
-
     const logout = () => {
         localStorage.clear();
         setValidation(false)
@@ -48,10 +44,10 @@ const Login = () => {
 
 
     return (
-       
-        <div id="login-outer-container" className={`login-outer-container mx-auto my-auto col-2 ${(window.location.href)!="http://localhost:3000/reg" ? null:"hide"}`}>
-             {console.log(window.location.href)}
-           
+
+        <div id="login-outer-container" className={`login-outer-container mx-auto my-auto col-2 ${(window.location.href) != "http://localhost:3000/reg" ? null : "hide"}`}>
+            {console.log(window.location.href)}
+
             {(!localStorage.getItem("user")) ? <div> <h1>Login</h1>
                 <p>{statusMessage}</p>
 
@@ -66,9 +62,9 @@ const Login = () => {
                     <input className="form-control " placeholder="password" id="password" type="password" onChange={(event) => setPassword(event.target.value)} />
                 </div>
                 {(!validation) ? null : <Redirect to="/join"></Redirect>}
-                <button className="btn btn-primary" onClick={getValidation}>Login</button>
+                <button className="btn btn-primary mr-1 mt-1 col-5" onClick={getValidation}>Login</button>
 
-                <Link to="/reg"><button id="reg-button" className="btn btn-primary">Register</button></Link></div> : <div><h1>Welcome  {localStorage.getItem("user")} </h1>
+                <Link to="/reg"><button id="reg-button" className="btn btn-primary mt-1 col-6">Register</button></Link></div> : <div><h1>Welcome  {localStorage.getItem("user")} </h1>
 
                     <button className="btn btn-danger" onClick={logout}><Link to="/">Logout</Link></button>
 

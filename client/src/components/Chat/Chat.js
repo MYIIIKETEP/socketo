@@ -21,12 +21,12 @@ const Chat = ({ location }) => {
 
   function getMessages(currentRoom) {
 
-
+    console.log(name)
     let messageObjectArray = [];
 
     console.log("room: " + currentRoom);
-    axios.get("http://localhost:4000/messages").then(messagesDB => {
 
+    axios.get("http://localhost:4000/messages").then(messagesDB => {
 
       messagesDB.data.forEach(message => {
 
@@ -39,11 +39,13 @@ const Chat = ({ location }) => {
         }
       });
 
+      messageObjectArray.push({ user: "admin", text: `${name}, welcome to ${room} chat away!` });
+
       setMessages(messageObjectArray);
     });
 
 
-    //setMessages(messageObjectArray);
+
     console.log(messages);
   }
 
@@ -85,7 +87,7 @@ const Chat = ({ location }) => {
 
   useEffect(() => {
     socket.on("message", (message) => {
-      console.log(message);
+
       setMessages([...messages, message]);
     })
   }, [messages])
@@ -112,11 +114,11 @@ const Chat = ({ location }) => {
     }
   }
 
-  console.log(message, messages);
+
 
   return (
     <div className="outerContainer">
-      <div className="container">
+      <div className="chat-container" >
         <InfoBar room={room} />
         <Messages messages={messages} name={name} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
